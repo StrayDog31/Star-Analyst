@@ -1,7 +1,21 @@
-import React from "react";
-import '../styles/components/MediaBanner.css'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setFilterName } from "../modules/classSlice";
+import "../styles/components/MediaBanner.css";
 
 export default function MediaBanner() {
+  const dispatch = useDispatch();
+  const [localSearch, setLocalSearch] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(setFilterName(localSearch));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalSearch(e.target.value);
+  };
+
   return (
     <section className="mediabanner">
       <div className="mediabanner__image">
@@ -12,11 +26,14 @@ export default function MediaBanner() {
           <form
             className="mediabanner__search search d-flex w-100"
             role="search"
+            onSubmit={handleSearchSubmit}
           >
             <input
               type="search"
               className="search__input form-control flex-grow-1"
-              placeholder="Поиск..."
+              placeholder="Поиск"
+              value={localSearch}
+              onChange={handleInputChange}
             />
             <button
               className="search__button button btn btn-outline-light ms-2"

@@ -4,6 +4,9 @@
   height: 100vh;
   overflow: hidden;
   background-color: #000;
+  cursor: pointer;
+    background: 
+    url('/images/Landing.gif') center/cover no-repeat;
 }
 
 .landing::before {
@@ -13,7 +16,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/images/space-bg.gif') center/cover no-repeat;
   z-index: -1;
 }
 
@@ -23,7 +25,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* затемнение для читаемости */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,8 +33,9 @@
 
 .landing__content {
   text-align: center;
-  color: var(--color-light);
+  color: white;
   padding: 0 1.5rem;
+  max-width: 800px;
 }
 
 .landing__title {
@@ -50,23 +53,15 @@
   opacity: 0.9;
 }
 
-.landing__button {
-  padding: 0.8rem 2rem;
-  border: var(--border-active-width) solid transparent;
-  background: none;
-  color: var(--color-light);
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.landing__click-hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 3rem;
+  opacity: 0.8;
+  animation: fadeInOut 2s infinite;
 }
 
-.landing__button:hover {
-  transform: scale(1.05);
-}
-
-.landing__button:active {
-  border-color: var(--color-blue);
-  border-radius: var(--border-active-width);
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }

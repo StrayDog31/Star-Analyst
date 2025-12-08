@@ -4,7 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import { fetchClassById } from "../modules/api";
 import { StarClass } from "../modules/types";
 import "../styles/ClassDetailPage.css";
-import { Navbar } from "react-bootstrap";
 import Header from "../components/Navbar";
 
 export default function ClassDetailPage() {

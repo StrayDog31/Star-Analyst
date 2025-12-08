@@ -83,3 +83,19 @@
   text-align: left;
 }
 
+.search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .search {
+    flex-direction: column;
+  }
+  
+  .search__button {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}
+

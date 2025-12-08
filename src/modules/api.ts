@@ -15,7 +15,13 @@ export interface RequestBin {
   item_count: number;
 }
 
-const API_BASE = "/api";
+const getApiBase = () => {
+  const isTauri =
+    typeof window !== "undefined" && (window as any).__TAURI__ !== undefined;
+  return "http://localhost:8080/api";
+};
+
+const API_BASE = getApiBase();
 
 const MOCK_CLASSES: StarClass[] = [
   {
@@ -26,7 +32,7 @@ const MOCK_CLASSES: StarClass[] = [
     spectre: "O5-O9",
     examples: "Зета Ориона",
     isDeleted: false,
-    image_url: "/images/O-Class.png",
+    image_url: "/images/default.png",
     massRequestToClass: null,
   },
   {
@@ -37,7 +43,7 @@ const MOCK_CLASSES: StarClass[] = [
     spectre: "B0-B9",
     examples: "Ригель",
     isDeleted: false,
-    image_url: "/images/B-Class.png",
+    image_url: "/images/default.png",
     massRequestToClass: null,
   },
   {
@@ -48,7 +54,7 @@ const MOCK_CLASSES: StarClass[] = [
     spectre: "A0-A9",
     examples: "Сириус, Вега",
     isDeleted: false,
-    image_url: "/images/A-Class.png",
+    image_url: "/images/default.png",
     massRequestToClass: null,
   },
 ];
@@ -84,6 +90,7 @@ export async function fetchClasses(query: string = ""): Promise<StarClass[]> {
     return Array.isArray(data) ? data.map(mapBackendToFrontend) : [];
   } catch (err) {
     console.warn("Using mock data for classes:", err);
+    console.log("API_BASE used:", API_BASE); // Для отладки
     return MOCK_CLASSES.filter(
       (cls) =>
         !cls.isDeleted &&
@@ -106,6 +113,7 @@ export async function fetchClassById(id: string): Promise<StarClass | null> {
     return mapBackendToFrontend(data);
   } catch (err) {
     console.warn("Using mock data for class ID:", id, err);
+    console.log("API_BASE used:", API_BASE); // Для отладки
     const classId = parseInt(id);
     return (
       MOCK_CLASSES.find((cls) => cls.id === classId && !cls.isDeleted) || null
@@ -197,5 +205,18 @@ export async function fetchRequestBin(): Promise<RequestBin> {
   } catch (err) {
     console.warn("Using mock request bin:", err);
     return MOCK_REQUEST_BIN;
+  }
+}
+
+export async function fetchCartCount(): Promise<number> {
+  try {
+    const response = await fetch(`${API_BASE}/requests/cart`);
+    if (!response.ok) throw new Error("Failed to fetch cart count");
+
+    const data = await response.json();
+    return data.item_count || 0;
+  } catch (error) {
+    console.warn("Using mock cart count:", error);
+    return 3;
   }
 }

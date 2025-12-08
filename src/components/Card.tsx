@@ -25,7 +25,7 @@ export default function StarCard({ id, name, image }: StarCardProps) {
   return (
     <Card className="card">
       <div className="card__image">
-        <img src={image || "/images/default-star.png"} alt={name} />
+        <img src={image || "/images/default.png"} alt={name} />
       </div>
 
       <div className="card__inner">
