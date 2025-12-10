@@ -210,7 +210,7 @@ export async function fetchRequestBin(): Promise<RequestBin> {
 
 export async function fetchCartCount(): Promise<number> {
   try {
-    const response = await fetch(`${API_BASE}/requests/cart`);
+    const response = await fetch(`${API_BASE}/mass-requests/star-calculation`);
     if (!response.ok) throw new Error("Failed to fetch cart count");
 
     const data = await response.json();

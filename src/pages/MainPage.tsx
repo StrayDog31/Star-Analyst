@@ -12,6 +12,7 @@ import {
 } from "../modules/classSlice";
 import "../styles/MainPage.css";
 import Cart from "../components/Cart";
+import Carousel from "../components/Carousel";
 
 const mockCards = [
   { id: "1", name: "O", image: "/images/default.png" },
@@ -78,7 +79,7 @@ export default function HomePage() {
       <Header />
       <MediaBanner />
       <Breadcrumbs />
-
+      <Carousel/>
       <div>
         <h1 style={{ margin: "1.5rem" }}>Спектральные классы звезд</h1>
 
@@ -133,9 +134,8 @@ export default function HomePage() {
           )}
         </div>
       </div>
-
       <div style={{ padding: "0 10%" }}></div>
-      <Cart/>
+      <Cart />
     </>
   );
 }
